@@ -1,3 +1,5 @@
+import math
+
 # define beaching status
 # 0 = at sea, 1 = beached, 2 = after non-beach dyn (?), 3 = after beach dyn (???), 4 = please unbeach (not needed yet).
 # if my particles get beached, I will keep them beached, for now.
@@ -70,7 +72,7 @@ def StokesDrift(particle,fieldset,time):
 def BeachedStatusCheck(particle, fieldset, time):
     if particle.beached == 2:
         (u, v) = fieldset.UV[time, particle.depth, particle.lat, particle.lon]
-        if fabs(u) < 1e-14 and fabs(v) < 1e-14: # fabs is absolute value as a float (abs will return an integer
+        if math.fabs(u) < 1e-14 and math.fabs(v) < 1e-14: # math.fabs is absolute value as a float (abs will return an integer
             particle.beached = 1 # beached
         else:
             particle.beached = 0 # not beached
